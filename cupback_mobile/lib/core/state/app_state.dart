@@ -698,8 +698,14 @@ class AppState extends ChangeNotifier {
   List<CartItem> get cart => _cart;
   String? get cartCafeId => _cartCafeId;
   String? get cartCafeName => _cartCafeName;
-  OrderModel? get activeOrder => _activeOrder;
+  OrderModel? get activeOrder => (_activeOrder != null && _activeOrder!.status != OrderStatus.completed) ? _activeOrder : null;
+  OrderModel? get rawActiveOrder => _activeOrder;
   List<OrderModel> get orderHistory => _orderHistory;
+
+  void clearActiveOrder() {
+    _activeOrder = null;
+    notifyListeners();
+  }
 
   bool get isLoggedIn => _session != null;
   bool get isCustomer => _session?.role == UserRole.customer;
@@ -1036,6 +1042,9 @@ class AppState extends ChangeNotifier {
     }
     if (_activeOrder != null && _activeOrder!.id == orderId) {
       _activeOrder!.status = newStatus;
+      if (newStatus == OrderStatus.completed) {
+        _activeOrder!.estimatedMinutesRemaining = 0;
+      }
     }
     final hIdx = _orderHistory.indexWhere((o) => o.id == orderId);
     if (hIdx >= 0) {

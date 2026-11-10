@@ -4,6 +4,7 @@ import '../core/theme/app_theme.dart';
 import '../core/state/app_state.dart';
 import '../core/models/cafe.dart';
 import '../core/models/product.dart';
+import '../core/models/order_model.dart';
 import '../core/widgets/fade_slide_transition.dart';
 import '../core/widgets/pressable_scale.dart';
 import '../core/widgets/bouncing_cart_badge.dart';
@@ -192,6 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final userName = appState?.session?.name;
     final isArabic = appState?.strings.isArabic ?? true;
     final activeOrder = appState?.activeOrder;
+    final isOrderLive = activeOrder != null && activeOrder.status != OrderStatus.completed;
     final categories = isArabic ? _categoriesAr : _categoriesEn;
 
     return Scaffold(
@@ -495,8 +497,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 const SliverToBoxAdapter(child: SizedBox(height: 14)),
 
-                // 4. Active Order Tracker Banner (If an order is live)
-                if (activeOrder != null) ...[
+                // 4. Active Order Tracker Banner (Only if order is live & preparing)
+                if (isOrderLive) ...[
                   SliverToBoxAdapter(
                     child: FadeSlideTransition(
                       delay: const Duration(milliseconds: 180),

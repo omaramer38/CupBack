@@ -21,7 +21,7 @@ class _OrderTrackingScreenState extends State<OrderTrackingScreen> {
     final appState = AppStateScope.of(context);
     final strings = appState.strings;
     final isArabic = strings.isArabic;
-    final order = appState.activeOrder ?? widget.order;
+    final order = appState.rawActiveOrder ?? widget.order;
 
     final orderCount = appState.getOrdersCountForCafe(order.cafeId);
     final remainingOrders = appState.getRemainingOrdersForReward(order.cafeId);
