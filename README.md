@@ -15,13 +15,25 @@
 
 ## 🚀 التشغيل السريع (Quick Start)
 
-### تشغيل التطبيق بضغطة زر:
+### 1. تشغيل بوابة صاحب الكافيه على الويب (Web Portal) 💻:
+اضغط مرتين على الملف:
+```cmd
+run_web.bat
+```
+أو عبر التيرمينال:
+```bash
+cd cafe_owner_web
+npm install
+npm run dev
+```
+وافتح المتصفح على: `http://localhost:5173`
+
+### 2. تشغيل تطبيق الموبايل (Flutter Mobile App) 📱:
 اضغط مرتين على الملف:
 ```cmd
 run_app.bat
 ```
-
-### أو عبر سطر الأوامر:
+أو عبر التيرمينال:
 ```bash
 cd cupback_mobile
 flutter run
